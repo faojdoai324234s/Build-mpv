@@ -26,6 +26,7 @@ jobs:
       - name: Build library
         shell: cmd
         run: |
+          set PATH=%PATH%;C:\msys64
           pacman -S pactoys git
           pacboy -S python pkgconf cc meson
           pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
