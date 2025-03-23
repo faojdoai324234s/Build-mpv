@@ -36,7 +36,8 @@ jobs:
           pacman --noconfirm -S --needed pactoys
           echo "Listing MSYS64 bin..."
           dir C:\msys64\usr\bin\
-          pacboy -S python pkgconf cc meson
+          vcpkg install pkgconf
+          pacboy -S cc
           pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
 
       - name: Upload artifact
