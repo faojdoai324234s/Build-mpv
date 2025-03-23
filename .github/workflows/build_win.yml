@@ -1,0 +1,27 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  Build-Win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download library
+        run: |
+          git clone --branch v0.36.0 https://github.com/mpv-player/mpv.git
+          
+      - name: Build library
+        shell: cmd
+        run: |
+          cmake -B build
+          cmake --build build --config Debug
+          rmdir /s /q build
+          cmake -B build
+          cmake --build build --config Release
