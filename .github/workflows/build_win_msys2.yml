@@ -17,6 +17,13 @@ jobs:
         shell: cmd
         run: |
           pip install meson ninja
+
+      - name: Install additional dependencies
+        shell: msys2 {0}
+        run: |
+          pacman --noconfirm -S --needed pactoys
+          pacboy --noconfirm -S --needed python pkgconf cc meson
+          pacboy --noconfirm -S --needed ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
           
       - name: Download library
         shell: cmd
@@ -24,16 +31,17 @@ jobs:
           git clone --branch v0.36.0 https://github.com/mpv-player/mpv.git
           
       - name: Build library
-        shell: msys2 {0}
+        shell: cmd
         run: |
-          pacman --noconfirm -S --needed pactoys
-          pacboy --noconfirm -S --needed python pkgconf cc meson
-          pacboy --noconfirm -S --needed ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
+          mkdir upload
+          meson setup build -Dlibmpv=true --prefix=${{github.workspace}}/upload
+          meson compile -C build
+          meson install -C build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/mpv/build
+          path: upload
           if-no-files-found: ignore
           retention-days: 0
