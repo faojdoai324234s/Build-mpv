@@ -33,7 +33,7 @@ jobs:
           dir C:\Program Files\Git\bin\
           echo "Listing MSYS64 bin..."
           dir C:\msys64\usr\bin\
-          pacman -S pactoys
+          pacman --noconfirm -S --needed pactoys
           pacboy -S python pkgconf cc meson
           pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
 
