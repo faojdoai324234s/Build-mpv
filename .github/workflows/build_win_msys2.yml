@@ -17,6 +17,7 @@ jobs:
         shell: cmd
         run: |
           pip install meson ninja
+          choco install pkgconfiglite
 
       - name: Install additional dependencies
         shell: msys2 {0}
