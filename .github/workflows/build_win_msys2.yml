@@ -34,7 +34,7 @@ jobs:
         shell: cmd
         run: |
           mkdir upload
-          cd mpv
+          cd mpv-player/mpv
           meson setup build -Dlibmpv=true --prefix=${{github.workspace}}/upload
           meson compile -C build
           meson install -C build
