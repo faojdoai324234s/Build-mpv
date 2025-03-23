@@ -34,8 +34,9 @@ jobs:
         shell: cmd
         run: |
           mkdir upload
-          cd mpv-player/mpv
-          meson setup build -Dlibmpv=true --prefix=${{github.workspace}}/upload
+          cd mpv
+          mkdir build
+          meson setup build -Dlibmpv=true --prefix=${{github.workspace}}\upload
           meson compile -C build
           meson install -C build
 
@@ -44,5 +45,13 @@ jobs:
         with:
           name: Windows-artifact
           path: upload
+          if-no-files-found: ignore
+          retention-days: 0
+          
+      - name: Upload artifact again
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-artifact
+          path: ${{github.workspace}}/mpv/build
           if-no-files-found: ignore
           retention-days: 0
