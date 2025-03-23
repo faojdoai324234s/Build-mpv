@@ -26,11 +26,9 @@ jobs:
       - name: Build library
         shell: cmd
         run: |
-          cmake -B build
-          cmake --build build --config Debug
-          rmdir /s /q build
-          cmake -B build
-          cmake --build build --config Release
+          pacman -S pactoys git
+          pacboy -S python pkgconf cc meson
+          pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
