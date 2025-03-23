@@ -34,6 +34,8 @@ jobs:
           echo "Listing MSYS64 bin..."
           dir C:\msys64\usr\bin\
           pacman --noconfirm -S --needed pactoys
+          echo "Listing MSYS64 bin..."
+          dir C:\msys64\usr\bin\
           pacboy -S python pkgconf cc meson
           pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
 
