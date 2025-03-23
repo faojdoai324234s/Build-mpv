@@ -26,14 +26,14 @@ jobs:
       - name: Build library
         shell: cmd
         run: |
-          set PATH=%PATH%;C:\msys64
+          set PATH=%PATH%;C:\msys64\usr\bin\
           echo "Listing MSYS64..."
           dir C:\msys64
           echo "Listing Git bin..."
           dir C:\Program Files\Git\bin\
           echo "Listing MSYS64 bin..."
           dir C:\msys64\usr\bin\
-          pacman -S pactoys git
+          pacman -S pactoys
           pacboy -S python pkgconf cc meson
           pacboy -S ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
 
