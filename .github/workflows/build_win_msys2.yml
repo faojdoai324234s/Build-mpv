@@ -1,4 +1,4 @@
-name: Windows Build
+name: Windows Build MSYS2
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
   
 jobs:
-  Build-Win-MSYS2:
+  Build-Win:
     runs-on: windows-2019
     steps:
       - uses: msys2/setup-msys2@v2
