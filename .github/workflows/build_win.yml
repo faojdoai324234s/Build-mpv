@@ -13,7 +13,13 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v4
+      - name: Install dependencies
+        shell: cmd
+        run: |
+          pip install meson ninja
+          
       - name: Download library
+        shell: cmd
         run: |
           git clone --branch v0.36.0 https://github.com/mpv-player/mpv.git
           
