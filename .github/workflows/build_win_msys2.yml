@@ -1,0 +1,39 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  Build-Win-MSYS2:
+    runs-on: windows-2019
+    steps:
+      - uses: msys2/setup-msys2@v2
+      - name: Install dependencies
+        shell: cmd
+        run: |
+          pip install meson ninja
+          
+      - name: Download library
+        shell: cmd
+        run: |
+          git clone --branch v0.36.0 https://github.com/mpv-player/mpv.git
+          
+      - name: Build library
+        shell: msys2 {0}
+        run: |
+          pacman --noconfirm -S --needed pactoys
+          pacboy --noconfirm -S --needed python pkgconf cc meson
+          pacboy --noconfirm -S --needed ffmpeg libjpeg-turbo libplacebo luajit vulkan-headers
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-artifact
+          path: ${{github.workspace}}/mpv/build
+          if-no-files-found: ignore
+          retention-days: 0
